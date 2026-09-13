@@ -2,6 +2,7 @@ from  flask import Flask
 from config import Config
 from .extensions import db
 from .models import Enquiry,Shipment
+from .main import bp
 import os
 def create_app():
     app = Flask(__name__, instance_relative_config=True)
@@ -18,8 +19,6 @@ def create_app():
     with app.app_context():
         db.create_all()
 
-    @app.route("/")
-    def hello_world():
-        return "<p>Hello World</p>"
+    app.register_blueprint(bp)
 
     return app

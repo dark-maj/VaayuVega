@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Send an Enquiry{% endblock %}
+
+{% block content %}
+
+<h1>Send an Enquiry</h1>
+
+<form method="POST">
+
+    {{ form.hidden_tag() }}
+
+    <p>
+        {{ form.name.label }}
+        {{ form.name() }}
+        {% for error in form.name.errors %}
+            <span class="error">{{ error }}</span>
+        {% endfor %}
+    </p>
+
+    <p>
+        {{ form.contact.label }}
+        {{ form.contact() }}
+        {% for error in form.contact.errors %}
+            <span class="error">{{ error }}</span>
+        {% endfor %}
+    </p>
+
+    <p>
+        {{ form.pickup_location.label }}
+        {{ form.pickup_location() }}
+        {% for error in form.pickup_location.errors %}
+            <span class="error">{{ error }}</span>
+        {% endfor %}
+    </p>
+
+    <p>
+        {{ form.drop_location.label }}
+        {{ form.drop_location() }}
+        {% for error in form.drop_location.errors %}
+            <span class="error">{{ error }}</span>
+        {% endfor %}
+    </p>
+
+    <p>
+        {{ form.weight.label }}
+        {{ form.weight() }}
+        {% for error in form.weight.errors %}
+            <span class="error">{{ error }}</span>
+        {% endfor %}
+    </p>
+
+    <p>
+        {{ form.parcel_details.label }}
+        {{ form.parcel_details() }}
+        {% for error in form.parcel_details.errors %}
+            <span class="error">{{ error }}</span>
+        {% endfor %}
+    </p>
+
+    <button type="submit">Submit Enquiry</button>
+
+</form>
+
+{% endblock %}

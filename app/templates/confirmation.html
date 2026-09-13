@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Enquiry Submitted{% endblock %}
+
+{% block content %}
+
+<h1>Thanks — your enquiry has been received</h1>
+
+<p>
+    Your reference number is <strong>{{ enquiry.id }}</strong>.
+    Please quote this if you contact us about your enquiry.
+</p>
+
+<p>
+    <a href="{{ url_for('main.enquiry') }}">Submit another enquiry</a>
+</p>
+
+{% endblock %}
