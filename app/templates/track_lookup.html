@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Track Your Shipment{% endblock %}
+
+{% block content %}
+
+<h1>Track Your Shipment</h1>
+
+<form method="POST">
+
+    {{ form.hidden_tag() }}
+
+    <p>
+        {{ form.tracking_id.label }}
+        {{ form.tracking_id() }}
+        {% for error in form.tracking_id.errors %}
+            <span class="error">{{ error }}</span>
+        {% endfor %}
+    </p>
+
+    <button type="submit">Track</button>
+
+</form>
+
+{% endblock %}

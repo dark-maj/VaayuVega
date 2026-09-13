@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Shipment {{ shipment.tracking_id }}{% endblock %}
+
+{% block content %}
+
+<h1>Shipment {{ shipment.tracking_id }}</h1>
+
+<p><strong>Status:</strong> {{ shipment.status }}</p>
+<p><strong>From:</strong> {{ shipment.pickup_location }}</p>
+<p><strong>To:</strong> {{ shipment.drop_location }}</p>
+<p><strong>Weight:</strong> {{ shipment.weight }} kg</p>
+<p><strong>Parcel details:</strong> {{ shipment.parcel_details }}</p>
+
+<p>
+    <strong>Estimated price:</strong>
+    {% if shipment.estimated_price %}
+        ₹{{ shipment.estimated_price }}
+    {% else %}
+        To be confirmed
+    {% endif %}
+</p>
+
+<p><strong>Last updated:</strong> {{ shipment.updated_at.strftime('%d %b %Y, %I:%M %p') }}</p>
+
+{% endblock %}
