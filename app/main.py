@@ -1,20 +1,21 @@
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, redirect, url_for,flash
 from .extensions import db
 from .models import Enquiry, Shipment
 from .forms import EnquiryForm, TrackForm
-
 bp = Blueprint("main", __name__)
 
 
 @bp.route("/enquiry", methods=["GET", "POST"])
 def enquiry():
     form = EnquiryForm()
+   
     if form.validate_on_submit():
         new_enquiry = Enquiry(
             name=form.name.data,
             contact=form.contact.data,
             pickup_location=form.pickup_location.data,
             drop_location=form.drop_location.data,
+           
             weight=form.weight.data,
             parcel_details=form.parcel_details.data,
             estimated_price=None,
@@ -27,7 +28,7 @@ def enquiry():
         )
 
     return render_template("enquiry.html", form=form)
-
+    
 
 @bp.route("/enquiry/confirmation/<int:enquiry_id>")
 def enquiry_confirmation(enquiry_id):
@@ -53,3 +54,5 @@ def track_result(tracking_id):
     tracking_id = tracking_id.upper()
     shipment = Shipment.query.filter_by(tracking_id=tracking_id).first_or_404()
     return render_template("track_result.html", shipment=shipment)
+
+
