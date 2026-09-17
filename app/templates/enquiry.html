@@ -43,6 +43,14 @@
     </p>
 
     <p>
+        {{ form.country.label }}
+        {{ form.country() }}
+        {% for error in form.country.errors %}
+            <span class="error">{{ error }}</span>
+        {% endfor %}
+    </p>
+
+    <p>
         {{ form.weight.label }}
         {{ form.weight() }}
         {% for error in form.weight.errors %}
