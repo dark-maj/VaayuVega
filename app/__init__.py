@@ -1,10 +1,12 @@
 from  flask import Flask
 from config import Config
-from .extensions import db,login
+from .extensions import db,login,admin
 from .models import Enquiry,Shipment,User
 from .main import bp
 from .auth import auth_bp
+from . import admin_views
 import click
+
 from werkzeug.security import generate_password_hash
 
 import os
@@ -39,6 +41,7 @@ def create_app():
 
         print(f"Admin user '{username}' created successfully.")
     login.init_app(app)
+    admin.init_app(app, index_view=admin_views.SecureIndexView())
     login.login_view="auth.login"
     with app.app_context():
         db.create_all()
