@@ -5,6 +5,7 @@ from .models import Enquiry,Shipment,User
 from .main import bp
 from .auth import auth_bp
 from . import admin_views
+from .constants import WHATSAPP_NUMBER, SITE_NAME, SITE_TAGLINE
 import click
 
 from werkzeug.security import generate_password_hash
@@ -46,7 +47,15 @@ def create_app():
     with app.app_context():
         db.create_all()
 
-    app.register_blueprint(bp)     
+    app.register_blueprint(bp)
     app.register_blueprint(auth_bp)
+
+    @app.context_processor
+    def inject_site_globals():
+        return dict(
+            whatsapp_number=WHATSAPP_NUMBER,
+            site_name=SITE_NAME,
+            site_tagline=SITE_TAGLINE,
+        )
 
     return app

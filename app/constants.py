@@ -14,3 +14,9 @@ SHIPMENT_STATUSES = [
     "Cancelled",
     "Returned"
 ]
+
+SITE_NAME = "Vaayu Vega"
+SITE_TAGLINE = "International Courier Services"
+
+# TODO: replace with Dad's real WhatsApp number (country code + number, digits only, no + or spaces)
+WHATSAPP_NUMBER = "911234567890"
