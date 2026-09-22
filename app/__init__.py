@@ -14,10 +14,18 @@ import os
 def create_app():
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(Config)
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
-        app.instance_path, "app.db"
-    )
-   
+
+    database_url = os.environ.get("DATABASE_URL")
+    if database_url:
+        # Render (and most hosts) give postgres:// but SQLAlchemy needs postgresql://
+        if database_url.startswith("postgres://"):
+            database_url = database_url.replace("postgres://", "postgresql://", 1)
+        app.config["SQLALCHEMY_DATABASE_URI"] = database_url
+    else:
+        app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
+            app.instance_path, "app.db"
+        )
+
     try:
         os.makedirs(app.instance_path)
     except OSError:
