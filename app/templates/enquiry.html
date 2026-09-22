@@ -5,69 +5,72 @@
 {% block content %}
 
 <h1>Send an Enquiry</h1>
+<p class="page-subtext">Tell us about your shipment and we'll get back to you on WhatsApp with a price.</p>
 
+<div class="card">
 <form method="POST">
 
     {{ form.hidden_tag() }}
 
-    <p>
+    <div class="form-group">
         {{ form.name.label }}
-        {{ form.name() }}
+        {{ form.name(class_="form-input") }}
         {% for error in form.name.errors %}
             <span class="error">{{ error }}</span>
         {% endfor %}
-    </p>
+    </div>
 
-    <p>
+    <div class="form-group">
         {{ form.contact.label }}
-        {{ form.contact() }}
+        {{ form.contact(class_="form-input") }}
         {% for error in form.contact.errors %}
             <span class="error">{{ error }}</span>
         {% endfor %}
-    </p>
+    </div>
 
-    <p>
+    <div class="form-group">
         {{ form.pickup_location.label }}
-        {{ form.pickup_location() }}
+        {{ form.pickup_location(class_="form-input") }}
         {% for error in form.pickup_location.errors %}
             <span class="error">{{ error }}</span>
         {% endfor %}
-    </p>
+    </div>
 
-    <p>
+    <div class="form-group">
         {{ form.drop_location.label }}
-        {{ form.drop_location() }}
+        {{ form.drop_location(class_="form-input") }}
         {% for error in form.drop_location.errors %}
             <span class="error">{{ error }}</span>
         {% endfor %}
-    </p>
+    </div>
 
-    <p>
+    <div class="form-group">
         {{ form.country.label }}
-        {{ form.country() }}
+        {{ form.country(class_="form-select") }}
         {% for error in form.country.errors %}
             <span class="error">{{ error }}</span>
         {% endfor %}
-    </p>
+    </div>
 
-    <p>
+    <div class="form-group">
         {{ form.weight.label }}
-        {{ form.weight() }}
+        {{ form.weight(class_="form-input") }}
         {% for error in form.weight.errors %}
             <span class="error">{{ error }}</span>
         {% endfor %}
-    </p>
+    </div>
 
-    <p>
+    <div class="form-group">
         {{ form.parcel_details.label }}
-        {{ form.parcel_details() }}
+        {{ form.parcel_details(class_="form-textarea") }}
         {% for error in form.parcel_details.errors %}
             <span class="error">{{ error }}</span>
         {% endfor %}
-    </p>
+    </div>
 
-    <button type="submit">Submit Enquiry</button>
+    <button type="submit" class="btn btn-primary">Submit Enquiry</button>
 
 </form>
+</div>
 
 {% endblock %}

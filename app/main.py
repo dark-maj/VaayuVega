@@ -2,8 +2,14 @@ from flask import Blueprint, render_template, redirect, url_for,flash
 from .extensions import db
 from .models import Enquiry, Shipment,CourierRate
 from .forms import EnquiryForm, TrackForm
+from .constants import SHIPMENT_STATUSES
 from flask_login import login_required
 bp = Blueprint("main", __name__)
+
+
+@bp.route("/")
+def home():
+    return render_template("home.html")
 
 
 @bp.route("/enquiry", methods=["GET", "POST"])
@@ -58,7 +64,17 @@ def track_lookup():
 def track_result(tracking_id):
     tracking_id = tracking_id.upper()
     shipment = Shipment.query.filter_by(tracking_id=tracking_id).first_or_404()
-    return render_template("track_result.html", shipment=shipment)
+
+    # Cancelled/Returned are exceptions, not steps on the normal stepper
+    steps = SHIPMENT_STATUSES[:-2]
+    current_step = steps.index(shipment.status) if shipment.status in steps else -1
+
+    return render_template(
+        "track_result.html",
+        shipment=shipment,
+        steps=steps,
+        current_step=current_step,
+    )
 
 
 @bp.route("/admin/enquiry/<int:enquiry_id>/convert", methods=["POST"])

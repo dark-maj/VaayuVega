@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}{{ site_name }}{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <h1>Ship anywhere in the world, tracked door to door.</h1>
+    <p>
+        {{ site_name }} handles international parcels end to end — send an
+        enquiry, get a price, and track your shipment right through to
+        delivery.
+    </p>
+    <div class="hero-actions">
+        <a class="btn btn-primary" href="{{ url_for('main.enquiry') }}">Send an Enquiry</a>
+        <a class="btn btn-outline" href="{{ url_for('main.track_lookup') }}">Track Your Shipment</a>
+    </div>
+</section>
+
+<div class="how-it-works">
+    <div class="how-step">
+        <span class="how-step__number">1</span>
+        <h3>Send an enquiry</h3>
+        <p>Tell us your pickup, destination country, and package weight.</p>
+    </div>
+    <div class="how-step">
+        <span class="how-step__number">2</span>
+        <h3>We confirm on WhatsApp</h3>
+        <p>We'll reach out to confirm pricing and pickup details.</p>
+    </div>
+    <div class="how-step">
+        <span class="how-step__number">3</span>
+        <h3>Track to delivery</h3>
+        <p>Once confirmed, use your tracking ID to follow every step.</p>
+    </div>
+</div>
+
+{% endblock %}

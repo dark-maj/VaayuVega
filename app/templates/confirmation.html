@@ -4,15 +4,24 @@
 
 {% block content %}
 
-<h1>Thanks — your enquiry has been received</h1>
+<div class="card" style="text-align:center;">
+    <div class="confirmation-badge">&#10003;</div>
+    <h1>Thanks — your enquiry has been received</h1>
+    <p class="page-subtext">
+        Your reference number is <span class="ref-number">{{ enquiry.id }}</span>.
+        Please quote this if you contact us.
+    </p>
+    <p class="page-subtext">
+        We'll follow up on WhatsApp shortly to confirm pricing and pickup.
+    </p>
 
-<p>
-    Your reference number is <strong>{{ enquiry.id }}</strong>.
-    Please quote this if you contact us about your enquiry.
-</p>
+    <a class="whatsapp-inline" href="https://wa.me/{{ whatsapp_number }}" target="_blank" rel="noopener">
+        Message Us on WhatsApp
+    </a>
 
-<p>
-    <a href="{{ url_for('main.enquiry') }}">Submit another enquiry</a>
-</p>
+    <p style="margin-top:20px;">
+        <a href="{{ url_for('main.enquiry') }}">Submit another enquiry</a>
+    </p>
+</div>
 
 {% endblock %}

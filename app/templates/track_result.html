@@ -6,21 +6,59 @@
 
 <h1>Shipment {{ shipment.tracking_id }}</h1>
 
-<p><strong>Status:</strong> {{ shipment.status }}</p>
-<p><strong>From:</strong> {{ shipment.pickup_location }}</p>
-<p><strong>To:</strong> {{ shipment.drop_location }}</p>
-<p><strong>Weight:</strong> {{ shipment.weight }} kg</p>
-<p><strong>Parcel details:</strong> {{ shipment.parcel_details }}</p>
+<div class="card">
 
-<p>
-    <strong>Estimated price:</strong>
-    {% if shipment.estimated_price %}
-        ₹{{ shipment.estimated_price }}
+    {% if shipment.status in ["Cancelled", "Returned"] %}
+        <div class="status-banner exception">
+            This shipment is currently marked as <strong>{{ shipment.status }}</strong>.
+        </div>
     {% else %}
-        To be confirmed
+        <div class="stepper">
+            {% for step in steps %}
+                <div class="stepper__step
+                    {% if loop.index0 < current_step %}done
+                    {% elif loop.index0 == current_step %}current
+                    {% endif %}">
+                    <div class="stepper__dot">{{ loop.index }}</div>
+                    <div class="stepper__label">{{ step }}</div>
+                </div>
+            {% endfor %}
+        </div>
     {% endif %}
-</p>
 
-<p><strong>Last updated:</strong> {{ shipment.updated_at.strftime('%d %b %Y, %I:%M %p') }}</p>
+    <div class="detail-grid">
+        <div class="detail-item">
+            <div class="detail-item__label">From</div>
+            <div class="detail-item__value">{{ shipment.pickup_location }}</div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-item__label">To</div>
+            <div class="detail-item__value">{{ shipment.drop_location }}{% if shipment.country %}, {{ shipment.country }}{% endif %}</div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-item__label">Weight</div>
+            <div class="detail-item__value">{{ shipment.weight }} kg</div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-item__label">Estimated Price</div>
+            <div class="detail-item__value">
+                {% if shipment.estimated_price %}
+                    &#8377;{{ "%.2f"|format(shipment.estimated_price) }}
+                {% else %}
+                    To be confirmed
+                {% endif %}
+            </div>
+        </div>
+        <div class="detail-item" style="grid-column: 1 / -1;">
+            <div class="detail-item__label">Parcel Details</div>
+            <div class="detail-item__value">{{ shipment.parcel_details }}</div>
+        </div>
+    </div>
+
+    <p class="page-subtext" style="margin-top:16px; margin-bottom:0;">
+        Last updated {{ shipment.updated_at.strftime('%d %b %Y, %I:%M %p') }}
+    </p>
+
+</div>
 
 {% endblock %}

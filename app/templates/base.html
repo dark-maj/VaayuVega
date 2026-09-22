@@ -5,11 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{% block title %}Vaayu Vega{% endblock %}</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}{{ site_name }}{% endblock %} — {{ site_tagline }}</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo.jpg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
+
+    <header class="site-header">
+        <div class="site-header__inner">
+            <a class="brand" href="{{ url_for('main.home') }}">
+                <img class="brand__logo" src="{{ url_for('static', filename='logo.jpg') }}" alt="{{ site_name }} logo">
+                <span class="brand__text">
+                    <span class="brand__name">{{ site_name }}</span>
+                    <span class="brand__tagline">{{ site_tagline }}</span>
+                </span>
+            </a>
+            <nav class="site-nav">
+                <a href="{{ url_for('main.enquiry') }}">Send Enquiry</a>
+                <a href="{{ url_for('main.track_lookup') }}">Track Shipment</a>
+            </nav>
+        </div>
+    </header>
 
     {% with messages = get_flashed_messages(with_categories=True) %}
       {% if messages %}
@@ -21,7 +38,18 @@
       {% endif %}
     {% endwith %}
 
-    {% block content %}{% endblock %}
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <a class="whatsapp-float" href="https://wa.me/{{ whatsapp_number }}" target="_blank" rel="noopener">
+        WhatsApp Us
+    </a>
+
+    <footer class="site-footer">
+        {{ site_name }} — {{ site_tagline }}<br>
+        Questions? Message us on <a href="https://wa.me/{{ whatsapp_number }}" target="_blank" rel="noopener">WhatsApp</a>.
+    </footer>
 
 </body>
 

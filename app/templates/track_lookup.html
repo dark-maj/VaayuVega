@@ -5,21 +5,24 @@
 {% block content %}
 
 <h1>Track Your Shipment</h1>
+<p class="page-subtext">Enter the tracking ID we shared with you (e.g. VV-2026-1234).</p>
 
+<div class="card">
 <form method="POST">
 
     {{ form.hidden_tag() }}
 
-    <p>
+    <div class="form-group">
         {{ form.tracking_id.label }}
-        {{ form.tracking_id() }}
+        {{ form.tracking_id(class_="form-input", placeholder="VV-2026-1234") }}
         {% for error in form.tracking_id.errors %}
             <span class="error">{{ error }}</span>
         {% endfor %}
-    </p>
+    </div>
 
-    <button type="submit">Track</button>
+    <button type="submit" class="btn btn-primary">Track</button>
 
 </form>
+</div>
 
 {% endblock %}
