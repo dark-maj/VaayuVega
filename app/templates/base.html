@@ -46,6 +46,12 @@
         WhatsApp Us
     </a>
 
+    <nav class="sticky-cta-bar">
+        <a href="tel:+{{ whatsapp_number }}">Call</a>
+        <a href="{{ url_for('main.track_lookup') }}">Track</a>
+        <a class="sticky-cta-bar__whatsapp" href="https://wa.me/{{ whatsapp_number }}" target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+
     <footer class="site-footer">
         {{ site_name }} — {{ site_tagline }}<br>
         Questions? Message us on <a href="https://wa.me/{{ whatsapp_number }}" target="_blank" rel="noopener">WhatsApp</a>.

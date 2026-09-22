@@ -12,7 +12,7 @@
         delivery.
     </p>
     <div class="hero-actions">
-        <a class="btn btn-primary" href="{{ url_for('main.enquiry') }}">Send an Enquiry</a>
+        <a class="btn btn-accent" href="{{ url_for('main.enquiry') }}">Send an Enquiry</a>
         <a class="btn btn-outline" href="{{ url_for('main.track_lookup') }}">Track Your Shipment</a>
     </div>
 </section>
@@ -34,5 +34,53 @@
         <p>Once confirmed, use your tracking ID to follow every step.</p>
     </div>
 </div>
+
+<div class="section-heading">
+    <h2>What we ship</h2>
+    <p>International parcels, documents, and more — door to door.</p>
+</div>
+
+<div class="services-grid">
+    <div class="service-card">
+        <div class="service-card__icon">&#128230;</div>
+        <h3>International Parcels</h3>
+        <p>Personal and commercial parcels shipped worldwide.</p>
+    </div>
+    <div class="service-card">
+        <div class="service-card__icon">&#128196;</div>
+        <h3>Document Courier</h3>
+        <p>Certificates, contracts, and paperwork, tracked end to end.</p>
+    </div>
+    <div class="service-card">
+        <div class="service-card__icon">&#127873;</div>
+        <h3>Gifts &amp; Personal Items</h3>
+        <p>Sending something to family abroad — packed and handled with care.</p>
+    </div>
+    <div class="service-card">
+        <div class="service-card__icon">&#128188;</div>
+        <h3>Commercial Shipments</h3>
+        <p>Bulk and business shipments, priced by weight and destination.</p>
+    </div>
+</div>
+
+<div class="section-heading">
+    <h2>Indicative Pricing by Zone</h2>
+    <p>Per kg, starting from — final price confirmed on WhatsApp based on weight and packaging.</p>
+</div>
+
+<div class="pricing-grid">
+    {% for zone, info in zone_rows %}
+    <div class="pricing-card">
+        <div>
+            <p class="pricing-card__zone">{{ zone }}</p>
+            <p class="pricing-card__countries">{{ info.countries | join(", ") }}{% if info.countries|length == 4 %} &amp; more{% endif %}</p>
+        </div>
+        <div class="pricing-card__price">
+            &#8377;{{ "%.0f"|format(info.price) }}<span>per kg</span>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<p class="pricing-note">Don't see your destination? Send an enquiry and we'll quote you directly.</p>
 
 {% endblock %}

@@ -9,7 +9,15 @@ bp = Blueprint("main", __name__)
 
 @bp.route("/")
 def home():
-    return render_template("home.html")
+    zones = {}
+    for rate in CourierRate.query.order_by(CourierRate.zone, CourierRate.country).all():
+        entry = zones.setdefault(rate.zone, {"price": rate.price_per_kg, "countries": []})
+        if len(entry["countries"]) < 4:
+            entry["countries"].append(rate.country)
+
+    zone_rows = sorted(zones.items(), key=lambda item: item[1]["price"])
+
+    return render_template("home.html", zone_rows=zone_rows)
 
 
 @bp.route("/enquiry", methods=["GET", "POST"])
